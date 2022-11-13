@@ -1,3 +1,4 @@
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.viewsets import ModelViewSet
 
 from logistic.models import Product, Stock
@@ -8,6 +9,7 @@ from rest_framework.filters import SearchFilter
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    pagination_class = PageNumberPagination
     # при необходимости добавьте параметры фильтрации
     filter_backends = [SearchFilter]
     search_fields = ['title','description']
@@ -16,6 +18,7 @@ class ProductViewSet(ModelViewSet):
 class StockViewSet(ModelViewSet):
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
+    pagination_class = PageNumberPagination
     # при необходимости добавьте параметры фильтрации
     filter_backends = [SearchFilter]
     SearchFilter.search_param = 'products'
